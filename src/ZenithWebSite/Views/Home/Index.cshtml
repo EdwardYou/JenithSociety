@@ -1,0 +1,45 @@
+﻿@using Microsoft.AspNetCore.Mvc.ViewFeatures
+
+@model IEnumerable<ZenithWebSite.Controllers.HomeController.RenderView>
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<h1 class="welcomeMsg text-center"> Welcome to <span class="zenithSociety">Zenith Society</span></h1>
+<div>
+        <div class="btn-group">
+            <a id="preWeek" asp-controller="Home" asp-action="index" asp-route-week="preWeek" data-ajax-method="GET" class="btn btn-primary">
+                <<<
+            </a>
+        </div>
+        <div class="btn-group">
+            <a id="newxWeek" asp-controller="Home" asp-action="index" asp-route-week="nextWeek" data-ajax-method="GET" class="btn btn-primary">
+                >>>
+            </a>
+        </div>
+    
+    <h2 class="text-center zenithSociety">Upcoming Events</h2>
+    
+</div>
+
+<div>
+    @Html.Partial("_EventsPartial", Model)
+</div>
+@*<table class="table" border="1">
+
+    @foreach (var e in Model.GroupBy(item => item.Event.EventDate))
+    {
+
+        <tr class="dateForSchedule">
+            <td colspan="2">@e.Key.ToString("dddd MMM dd, yyyy")</td>
+
+        </tr>
+        foreach (var a in e)
+        {
+            <tr>
+                <td class="eventTime">@a.Event.EventDateTimeFrom.ToString("HH:mm tt") - @a.Event.EventDateTimeTo.ToString("HH:mm tt")</td>
+                <td class="activityDescr">@a.Activity.ActivityDescr</td>
+            </tr>
+        }
+    }
+</table>*@

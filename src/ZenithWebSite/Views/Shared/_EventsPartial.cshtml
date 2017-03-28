@@ -1,0 +1,20 @@
+@using Microsoft.AspNetCore.Mvc.ViewFeatures
+@model IEnumerable<ZenithWebSite.Controllers.HomeController.RenderView>
+<table class="table" border="1">
+
+    @foreach (var e in Model.GroupBy(item => item.Event.EventDate))
+    {
+
+        <tr class="dateForSchedule">
+            <td colspan="2">@e.Key.ToString("dddd MMM dd, yyyy")</td>
+
+        </tr>
+        foreach (var a in e)
+        {
+            <tr>
+                <td class="eventTime">@a.Event.EventDateTimeFrom.ToString("HH:mm tt") - @a.Event.EventDateTimeTo.ToString("HH:mm tt")</td>
+                <td class="activityDescr">@a.Activity.ActivityDescr</td>
+            </tr>
+        }
+    }
+</table>
