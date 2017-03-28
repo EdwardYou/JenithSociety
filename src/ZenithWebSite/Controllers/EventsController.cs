@@ -69,6 +69,7 @@ namespace ZenithSociety.Controllers
         // GET: Activities/Create
         public async Task<ActionResult> Create()
         {
+            testc;
             ViewData["CurrUser"] = await _userManager.GetUserAsync(User);
             ViewData["Activities"] = new SelectList(_context.Activities, "ActivityId", "ActivityDescr");
             return View();
