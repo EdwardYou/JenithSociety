@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using ZenithWebSite.Models;
 using System.Diagnostics;
+using System.Globalization;
 
 namespace ZenithWebSite.Controllers
 {
@@ -30,33 +31,49 @@ namespace ZenithWebSite.Controllers
         }
         public async Task<IActionResult> Index(string week = "current")
         {
-            
             var curUsr = await _userManager.GetUserAsync(User);
-            var currRole = await _userManager.GetRolesAsync(curUsr);
-            ViewData["CurrRole"] = currRole;
-            //ViewData["CurrRole"] = "Annonymouse";
-            if (currRole.Equals("Admin") || currRole.Equals("Member"))
+            string role = "Annoymous";
+            if (curUsr != null)
             {
-                if (week.Equals("current"))
+                var currRoles = await _userManager.GetRolesAsync(curUsr);
+
+                foreach (var r in currRoles)
+                {
+                    if (r.Equals("Admin") || r.Equals("Member"))
+                    {
+                        role = "Members";
+                    }
+                }
+                ViewData["CurrRole"] = role;
+                if (role.Equals("Members"))
+                {
+                    if (week.Equals("current"))
+                    {
+                        i = 1;
+                    }
+                    else if (week.Equals("nextWeek"))
+                    {
+                        i = i + 7;
+                    }
+                    else if (week.Equals("preWeek"))
+                    {
+                        i = i - 7;
+                    }
+                }
+                else
                 {
                     i = 1;
                 }
-                else if (week.Equals("nextWeek"))
-                {
-                    i = i + 7;
-                }
-                else if (week.Equals("preWeek"))
-                {
-                    i = i - 7;
-                }
-            }
-            else
+            } else
             {
-                i = 1;
+                ViewData["CurrRole"] = role;
             }
 
+            
             DateTime startOfWeek = DateTime.Today.AddDays(((int)(DateTime.Today.DayOfWeek) * -1 + 1)+i);
             DateTime endOfWeek = DateTime.Today.AddDays(((int)(DateTime.Today.DayOfWeek) * -1 + 8)+i);
+
+            ViewData["CurrWeekNum"] = getCurrWeekNum(startOfWeek);
 
             var eventList = from e in _context.Events
                             join a in _context.Activities on e.ActivityId equals a.ActivityId
@@ -86,5 +103,15 @@ namespace ZenithWebSite.Controllers
         {
             return View();
         }
-    }
+
+        public string getCurrWeekNum(DateTime now)
+        {
+            CultureInfo ci = CultureInfo.CurrentCulture;
+            int weekNumber = ci.Calendar.GetWeekOfYear(now, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
+
+            string yearweek = now.Year +"-" + weekNumber;
+            return yearweek; 
+        }
+
+}
 }

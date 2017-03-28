@@ -7,21 +7,27 @@
 
 <h1 class="welcomeMsg text-center"> Welcome to <span class="zenithSociety">Zenith Society</span></h1>
 <div>
-        <div class="btn-group">
-            <a id="preWeek" asp-controller="Home" asp-action="index" asp-route-week="preWeek" data-ajax-method="GET" class="btn btn-primary">
-                <<<
-            </a>
-        </div>
-        <div class="btn-group">
-            <a id="newxWeek" asp-controller="Home" asp-action="index" asp-route-week="nextWeek" data-ajax-method="GET" class="btn btn-primary">
-                >>>
-            </a>
-        </div>
-    
-    <h2 class="text-center zenithSociety">Upcoming Events</h2>
-    
-</div>
+    <div class="homeBtnBox">
+        @if (!ViewData["CurrRole"].Equals("Annoymous"))
+        {
+            <div class="btn-group">
+                <a id="preWeek" asp-controller="Home" asp-action="index" asp-route-week="preWeek" data-ajax-method="GET" class="btn btn-primary">
+                    <<<
+                </a>
+            </div>
+            <div class="currWeekNum"> Week Number: @ViewData["CurrWeekNum"] </div>
+            <div class="btn-group">
+                <a id="newxWeek" asp-controller="Home" asp-action="index" asp-route-week="nextWeek" data-ajax-method="GET" class="btn btn-primary">
+                    >>>
+                </a>
+            </div>
+        }
 
+    </div>
+</div>
+<div>
+    <h2 class="text-center zenithSociety">Upcoming Events</h2>
+</div>
 <div>
     @Html.Partial("_EventsPartial", Model)
 </div>
