@@ -9,7 +9,7 @@
     <div class="panel-heading panel-head">Users</div>
     <div class="panel-body">
         <div class="btn-group">
-            <a id="createEditUserModal" data-toggle="modal" asp-action="AddUser" data-target="#modal-action-user" class="btn btn-primary">
+            <a id="createEditUserModal" data-toggle="modal" asp-action="UserRegister" data-target="#modal-action-user" class="btn btn-primary">
                 <i class="glyphicon glyphicon-plus"></i>  Add User
             </a>
         </div>
@@ -27,14 +27,19 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var item in Model)
+                @foreach (var item in Model.OrderBy(a => a.UserName))
                 {
                     <tr>
                         <td>@item.FirstName</td>
                         <td>@item.LastName</td>
                         <td>@item.UserName</td>
-                        <td>@item.RoleName</td>
-                        <td>@item.Email</td> 
+                        <td>
+                            @foreach (string b in @item.RoleNames.OrderBy(a => a))
+                            {
+                                <div>@b</div>
+                            } 
+                        </td>
+                        <td>@item.Email</td>
                         <td>
                             @if (!item.UserName.Equals("a"))
                             {
@@ -54,6 +59,12 @@
 </div>
 
 @Html.Partial("_Modal", new BootstrapModel { ID = "modal-action-user", AreaLabeledId = "modal-action-user-label", Size = ModalSize.Medium })
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
 
 @section scripts
 {

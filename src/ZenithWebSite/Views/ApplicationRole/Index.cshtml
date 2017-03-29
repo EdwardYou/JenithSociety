@@ -34,7 +34,7 @@
                                class="btn btn-info">
                                 <i class="glyphicon glyphicon-pencil"></i>  Edit
                             </a>
-                            @if (item.NumberOfUsers == 0 && item.RoleName != "Admin")
+                            @if (item.NumberOfUsers == 0)
                             {
                                 <a id="deleteApplicationRoleModal" data-toggle="modal" asp-action="DeleteApplicationRole" asp-route-id="@item.Id" data-target="#modal-action-application-role" class="btn btn-danger">
                                     <i class="glyphicon glyphicon-trash"></i>  Delete

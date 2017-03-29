@@ -1,5 +1,6 @@
 ﻿/// <autosync enabled="true" />
 /// <reference path="js/application-role-index.js" />
+/// <reference path="js/assignrole-index.js" />
 /// <reference path="js/jquery.validate.unobtrusive.js" />
 /// <reference path="js/site.js" />
 /// <reference path="js/user-index.js" />

@@ -10,14 +10,17 @@ namespace ZenithWebSite.Models.AccountViewModels
     {
         [Key]
         [Required]
+        [StringLength(13, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 3)]
         [Display(Name = "User Name")]
         public string UserName { get; set; }
 
         [Required]
+        [StringLength(13, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 3)]
         [Display(Name = "First Name")]
         public string FirstName { get; set; }
 
         [Required]
+        [StringLength(13, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 3)]
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
 

@@ -50,7 +50,10 @@
     "OpenIddict": "1.0.0-*",
     "OpenIddict.EntityFrameworkCore": "1.0.0-*",
     "OpenIddict.Mvc": "1.0.0-*",
-    "Microsoft.jQuery.Unobtrusive.Ajax": "3.2.3"
+    "Microsoft.jQuery.Unobtrusive.Ajax": "3.2.3",
+    "Microsoft.jQuery.Unobtrusive.Validation": "3.2.3",
+    "jquery.validate.unobtrusive.bootstrap": "1.2.3",
+    "Angular.UI.Bootstrap": "2.5.0"
   },
 
   "tools": {

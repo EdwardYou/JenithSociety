@@ -1,0 +1,35 @@
+﻿@model AddRoleViewModel
+@using ZenithWebSite.Models.ApplicationRoleModel
+
+<form asp-action="AssignUser" role="form">
+    @await Html.PartialAsync("_ModalHeader", new ModalHeader { Heading = "Assign User" })
+    <div class="modal-body form-horizontal">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label asp-for="UserId" class="col-lg-3 col-sm-3 control-label"></label>
+                    <div class="col-lg-6">
+                        <select asp-for="UserId" asp-items="@Model.UserLists" class="form-control">
+                            <option>Please select</option>
+                        </select>
+                        <span asp-validation-for="UserId" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label asp-for="ApplicationRoleId" class="col-lg-3 col-sm-3 control-label"></label>
+                    <div class="col-lg-6">
+                        <select asp-for="ApplicationRoleId" asp-items="@Model.ApplicationRoles" class="form-control">
+                            <option>Please select</option>
+                        </select>
+                        <span asp-validation-for="ApplicationRoleId" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @await Html.PartialAsync("_ModalFooter", new ModalFooter { })
+</form>
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>

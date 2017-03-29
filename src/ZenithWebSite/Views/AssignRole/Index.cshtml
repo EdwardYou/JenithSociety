@@ -1,0 +1,47 @@
+﻿@model IEnumerable<UserListViewModel>
+@using ZenithWebSite.Models.AccountViewModels
+@using ZenithWebSite.Models.ApplicationRoleModel
+
+<h2 class="text-center zenithSociety">Assign User Management</h2>
+
+<div class="top-buffer"></div>
+<div class="panel panel-primary">
+    <div class="panel-heading panel-head">Assign User</div>
+    <div class="panel-body">
+        <div class="btn-group">
+            <a id="assignUserRole" data-toggle="modal" asp-action="AssignUser" data-target="#modal-action-assignrole" class="btn btn-primary">
+                <i class="glyphicon glyphicon-plus"></i>  Assign User
+            </a>
+        </div>
+        <div class="top-buffer"></div>
+
+        <table class="table table-bordered table-striped table-condensed">
+            <thead>
+                <tr>
+                    <th>User Name</th>
+                    <th>Role Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.OrderBy(a => a.UserName))
+                {
+                    <tr>
+                        <td>@item.UserName</td>
+                        <td>@foreach (var b in @item.RoleNames.OrderBy(a => a))
+                            {
+                                <div>@b</div>
+                            }    
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@Html.Partial("_Modal", new BootstrapModel { ID = "modal-action-assignrole", AreaLabeledId = "modal-action-assignrole-label", Size = ModalSize.Medium })
+
+@section scripts
+{
+    <script src="~/js/assignrole-index.js" asp-append-version="true"></script>
+}
