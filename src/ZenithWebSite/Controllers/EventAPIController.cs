@@ -8,6 +8,7 @@ using ZenithWebSite.Models.JenithEventModel;
 using ZenithWebSite.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
+using Microsoft.EntityFrameworkCore;
 
 namespace ZenithWebSite.Controllers
 {
@@ -27,7 +28,7 @@ namespace ZenithWebSite.Controllers
         [HttpGet]
         public IEnumerable<Event> Get()
         {
-            return _context.Events.ToList();
+            return _context.Events.Include(e => e.Activity).ToList();
         }
 
         // GET: api/EventAPI/5

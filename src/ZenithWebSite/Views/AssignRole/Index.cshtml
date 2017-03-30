@@ -20,6 +20,7 @@
                 <tr>
                     <th>User Name</th>
                     <th>Role Name</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -27,11 +28,13 @@
                 {
                     <tr>
                         <td>@item.UserName</td>
-                        <td>@foreach (var b in @item.RoleNames.OrderBy(a => a))
-                            {
-                                <div>@b</div>
-                            }    
+                        <td>@item.RoleName</td>    
+                        <td>
+                            <a id="DeleteAssignedRole" data-toggle="modal" asp-action="DeleteAssignedRole" asp-route-id="@item.Id" data-target="#modal-action-role" class="btn btn-danger">
+                                <i class="glyphicon glyphicon-trash"></i>  Remove
+                            </a>
                         </td>
+
                     </tr>
                 }
             </tbody>
@@ -39,7 +42,7 @@
     </div>
 </div>
 
-@Html.Partial("_Modal", new BootstrapModel { ID = "modal-action-assignrole", AreaLabeledId = "modal-action-assignrole-label", Size = ModalSize.Medium })
+@Html.Partial("_Modal", new BootstrapModel { ID = "modal-action-role", AreaLabeledId = "modal-action-role-label", Size = ModalSize.Medium })
 
 @section scripts
 {
