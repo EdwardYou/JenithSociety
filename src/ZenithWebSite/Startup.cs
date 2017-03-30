@@ -52,11 +52,6 @@ namespace ZenithWebSite
                 options.UseOpenIddict();
             });
             
-            //services.AddIdentity<ApplicationUser, ApplicationRole>()
-            //    .AddEntityFrameworkStores<ApplicationDbContext>()
-            //    .AddDefaultTokenProviders();
-
-            //aaaaaaaaaaa
             services.AddIdentity<ApplicationUser, ApplicationRole>(identityOptions =>
             {
                 identityOptions.Cookies.ApplicationCookie.Events =
