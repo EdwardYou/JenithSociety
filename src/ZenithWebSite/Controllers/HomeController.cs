@@ -24,11 +24,7 @@ namespace ZenithWebSite.Controllers
             _context = context;
             _userManager = userManager;
         }
-        public class RenderView
-        {
-            public Event Event { get; set; }
-            public Activity Activity { get; set; }
-        }
+        
         public async Task<IActionResult> Index(string week = "current")
         {
             var curUsr = await _userManager.GetUserAsync(User);
@@ -104,6 +100,13 @@ namespace ZenithWebSite.Controllers
             return View();
         }
 
+        #region Helpers
+        public class RenderView
+        {
+            public Event Event { get; set; }
+            public Activity Activity { get; set; }
+        }
+
         public string getCurrWeekNum(DateTime now)
         {
             CultureInfo ci = CultureInfo.CurrentCulture;
@@ -112,6 +115,6 @@ namespace ZenithWebSite.Controllers
             string yearweek = now.Year +"-" + weekNumber;
             return yearweek; 
         }
-
-}
+        #endregion
+    }
 }
