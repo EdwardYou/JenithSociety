@@ -42,7 +42,7 @@ namespace ZenithWebSite.Controllers
             {
                 model.Add(new UserListViewModel
                 {
-                    Id = (ulist.UserId + ulist.RoleId),
+                    UserRoleId = (ulist.UserName + "&"+ ulist.Name),
                     FirstName = ulist.FirstName,
                     LastName = ulist.LastName,
                     UserName = ulist.UserName,
@@ -90,6 +90,7 @@ namespace ZenithWebSite.Controllers
                         IdentityResult roleResult = await _userManager.AddToRoleAsync(user, role.Name);
                         if (roleResult.Succeeded)
                         {
+                            await _context.SaveChangesAsync();
                             return RedirectToAction("Index");
                         }
                     }
@@ -111,7 +112,7 @@ namespace ZenithWebSite.Controllers
             {
                 foreach (var a in model)
                 {
-                    if ((a.UserId + a.RoleId).Equals(id))
+                    if ((a.UserId + "&" + a.RoleId).Equals(id))
                     {
                         ar = await _roleManager.FindByIdAsync(a.RoleId);
                         name = ar.Name;
@@ -126,14 +127,16 @@ namespace ZenithWebSite.Controllers
         {
             ApplicationRole ar = new ApplicationRole();
             ApplicationUser au = new ApplicationUser();
-            var model = from ur in _context.UserRoles
-                        select ur;
+            var model = from u in _context.Users
+                        join ur in _context.UserRoles on u.Id equals ur.UserId
+                        join r in _context.Roles on ur.RoleId equals r.Id
+                        select new { u.UserName, r.Name, ur.RoleId, ur.UserId };
 
             if (!String.IsNullOrEmpty(id))
             {
                 foreach (var a in model)
                 {
-                    if ((a.UserId + a.RoleId).Equals(id))
+                    if ((a.UserName + "&" + a.Name).Equals(id))
                     {
                         ar = await _roleManager.FindByIdAsync(a.RoleId);
                         au = await _userManager.FindByIdAsync(a.UserId);

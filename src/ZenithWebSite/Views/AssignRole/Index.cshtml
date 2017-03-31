@@ -9,7 +9,7 @@
     <div class="panel-heading panel-head">Assign User</div>
     <div class="panel-body">
         <div class="btn-group">
-            <a id="assignUserRole" data-toggle="modal" asp-action="AssignUser" data-target="#modal-action-role" class="btn btn-primary">
+            <a id="assignUserRole" data-toggle="modal" asp-action="AssignUser" data-target="#modal-action-assignrole" class="btn btn-primary">
                 <i class="glyphicon glyphicon-plus"></i>  Assign User
             </a>
         </div>
@@ -30,8 +30,9 @@
                         <td>@item.UserName</td>
                         <td>@item.RoleName</td>    
                         <td>
-                            @if(! item.UserName.Equals("a") || ! item.RoleName.Equals("Admin")) { 
-                                <a id="DeleteAssignedRole" data-toggle="modal" asp-action="DeleteAssignedRole" asp-route-id="@item.Id" data-target="#modal-action-role" class="btn btn-danger">
+                            @if (!item.UserName.Equals("a") || !item.RoleName.Equals("Admin"))
+                            {
+                                <a id="DeleteAssignedRole" data-toggle="modal" asp-action="DeleteAssignedRole" asp-route-id="@item.UserRoleId" data-target="#modal-action-assignrole" class="btn btn-danger">
                                     <i class="glyphicon glyphicon-trash"></i>  Remove
                                 </a>
                             }
@@ -44,7 +45,9 @@
     </div>
 </div>
 
-@Html.Partial("_Modal", new BootstrapModel { ID = "modal-action-role", AreaLabeledId = "modal-action-role-label", Size = ModalSize.Medium })
+@Html.Partial("_Modal", new BootstrapModel { ID = "modal-action-assignrole", AreaLabeledId = "modal-action-assignrole-label", Size = ModalSize.Medium })
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
 
 @section scripts
 {

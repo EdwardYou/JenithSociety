@@ -26,9 +26,12 @@ namespace ZenithWebSite.Controllers
         // GET: api/EventAPI
         [Authorize(Roles = "Admin, Member")]
         [HttpGet]
-        public IEnumerable<Event> Get()
+        public IActionResult Get()
         {
-            return _context.Events.Include(e => e.Activity).ToList();
+            var model = from c in _context.Events
+                        join a in _context.Activities on c.ActivityId equals a.ActivityId
+                        select new { c.EventId, c.EventDateTimeFrom, c.EventDateTimeTo, c.UserName, c.ActivityId, a.ActivityDescr };
+            return Json(model);
         }
 
         // GET: api/EventAPI/5

@@ -11,6 +11,7 @@ namespace ZenithWebSite.Models.AccountViewModels
     public class UserListViewModel
     {
         public string Id { get; set; }
+        public string UserRoleId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string UserName { get; set; }

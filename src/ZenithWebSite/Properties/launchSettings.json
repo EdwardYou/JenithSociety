@@ -1,6 +1,6 @@
 {
   "iisSettings": {
-    "windowsAuthentication": false,
+    "windowsAuthentication": true,
     "anonymousAuthentication": true,
     "iisExpress": {
       "applicationUrl": "http://localhost:50047/",
@@ -10,7 +10,8 @@
   "profiles": {
     "IIS Express": {
       "commandName": "IISExpress",
-      "launchUrl": "http://zenithsocietyservice.azurewebsites.net/",
+      "launchBrowser": true,
+      "launchUrl": "http://localhost:50047/",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
