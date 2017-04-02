@@ -11,12 +11,14 @@ using System.Globalization;
 using ZenithWebSite.Models;
 using Microsoft.AspNetCore.Identity;
 using System.Diagnostics;
+using Microsoft.AspNetCore.Cors;
 
 namespace ZenithWebSite.Controllers
 {
     [AllowAnonymous]
     [Produces("application/json")]
     [Route("api/HomeAPI")]
+    [EnableCors("MyPolicy")]
     public class HomeAPIController : Controller
     {
         private ApplicationDbContext _context;

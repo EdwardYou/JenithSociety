@@ -45,7 +45,7 @@ namespace ZenithWebSite.Controllers
                 {
                     if (week.Equals("current"))
                     {
-                        i = 1;
+                        i = 0;
                     }
                     else if (week.Equals("nextWeek"))
                     {
