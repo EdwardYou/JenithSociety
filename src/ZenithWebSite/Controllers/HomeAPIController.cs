@@ -35,8 +35,8 @@ namespace ZenithWebSite.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            DateTime startOfWeek = DateTime.Today.AddDays((int)(DateTime.Today.DayOfWeek) * -1 + 1);
-            DateTime endOfWeek = DateTime.Today.AddDays((int)(DateTime.Today.DayOfWeek) * -1 + 8);
+            DateTime startOfWeek = DateTime.Today.AddDays((int)(DateTime.Today.DayOfWeek) * -1 + -6);
+            DateTime endOfWeek = DateTime.Today.AddDays((int)(DateTime.Today.DayOfWeek) * -1 + 1);
 
             var eventList = from e in _context.Events
                             join a in _context.Activities on e.ActivityId equals a.ActivityId

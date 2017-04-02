@@ -66,8 +66,8 @@ namespace ZenithWebSite.Controllers
             }
 
             
-            DateTime startOfWeek = DateTime.Today.AddDays(((int)(DateTime.Today.DayOfWeek) * -1 + 1)+i);
-            DateTime endOfWeek = DateTime.Today.AddDays(((int)(DateTime.Today.DayOfWeek) * -1 + 8)+i);
+            DateTime startOfWeek = DateTime.Today.AddDays(((int)(DateTime.Today.DayOfWeek) * -1 - 6)+i);
+            DateTime endOfWeek = DateTime.Today.AddDays(((int)(DateTime.Today.DayOfWeek) * -1 + 1)+i);
 
             ViewData["CurrWeekNum"] = getCurrWeekNum(startOfWeek);
 
