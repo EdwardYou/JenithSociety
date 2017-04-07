@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer _localizer
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -35,7 +37,7 @@
                         <li><a asp-area="" asp-controller="User" asp-action="Index">User Management</a></li>
                         <li><a asp-area="" asp-controller="ApplicationRole" asp-action="Index">Role Management</a></li>
                         <li><a asp-area="" asp-controller="AssignRole" asp-action="Index">User Role Assign Management</a></li>
-                        <li><a asp-area="" asp-controller="Activities" asp-action="Index">Activities</a></li>
+                        <li><a asp-area="" asp-controller="Activities" asp-action="Index">@_localizer["Activities"]</a></li>
                         <li><a asp-area="" asp-controller="Events" asp-action="Index">Events</a></li>
                     }
                 </ul>
