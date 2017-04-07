@@ -10,6 +10,8 @@ using ZenithWebSite.Models.JenithEventModel;
 using ZenithWebSite.Models;
 using Microsoft.EntityFrameworkCore;
 using ZenithWebSite.Data;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Http;
 
 namespace ZenithSociety.Controllers
 {
@@ -26,6 +28,7 @@ namespace ZenithSociety.Controllers
         // GET: Activities
         public IActionResult Index()
         {
+            ViewData["CreateNew"] = "Create New";
             return View(_context.Activities.ToList());
         }
 
@@ -123,6 +126,17 @@ namespace ZenithSociety.Controllers
             _context.Activities.Remove(activity);
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");
+        }
+        [HttpPost]
+        public IActionResult SetLanguage(string culture, string returnUrl)
+        {
+            Response.Cookies.Append(
+                CookieRequestCultureProvider.DefaultCookieName,
+                CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)),
+                new CookieOptions { Expires = DateTimeOffset.UtcNow.AddDays(1) }
+            );
+
+            return LocalRedirect(returnUrl);
         }
     }
 }

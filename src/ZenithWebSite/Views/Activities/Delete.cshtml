@@ -1,18 +1,22 @@
 ﻿@model ZenithWebSite.Models.JenithEventModel.Activity
 
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer _localizer
+
+
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = _localizer["Delete"];
 }
 
-<h2>Delete</h2>
+<h2>@_localizer["Delete"]</h2>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>@_localizer["Are you sure you want to delete this?"]</h3>
 <div>
-    <h4>Activity</h4>
+    <h4>@_localizer["Activity"]</h4>
     <hr />
-    <dl class="dl-horizontal">
+    <div class="dl-horizontal">
         <dt>
-            <label asp-for="ActivityDescr"></label>
+            <p>@_localizer["Description"] </p>
         </dt>
 
         <dd>
@@ -20,22 +24,24 @@
         </dd>
 
         <dt>
-            <label asp-for="CreationDate"></label>
+            <p>@_localizer["Creation Date"] </p>
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.CreationDate)
         </dd>
 
-    </dl>
+    </div>
 
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            <input type="submit" value=@_localizer["Delete"] class="btn btn-default" /> |
+            <a asp-action="Index">
+                @_localizer["Back to List"]
+            </a>
         </div>
     }
 </div>

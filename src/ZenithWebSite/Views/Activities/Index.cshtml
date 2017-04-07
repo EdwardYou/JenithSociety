@@ -1,21 +1,26 @@
 ﻿@model IEnumerable<ZenithWebSite.Models.JenithEventModel.Activity>
 
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer _localizer
+
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = _localizer["Index"];
 }
 
-<h2 class="text-center zenithSociety">List of Activities</h2>
+<h2 class="text-center zenithSociety">@_localizer["List of Activities"]</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    <a asp-action="Create">
+        @_localizer["Create New"]    
+    </a>
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.ActivityDescr)
+            @_localizer["Description"]
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CreationDate)
+            @_localizer["Creation Date"]
         </th>
         <th></th>
     </tr>
@@ -30,9 +35,15 @@
                 @Html.DisplayFor(modelItem => item.CreationDate)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.ActivityId }) |
-                @Html.ActionLink("Details", "Details", new { id = item.ActivityId }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.ActivityId })
+                <a asp-action="Edit" asp-route-id="@item.ActivityId"> |
+                    @_localizer["Edit"]
+                </a>
+                <a asp-action="Details" asp-route-id="@item.ActivityId"> |
+                    @_localizer["Details"]
+                </a>
+                <a asp-action="Delete" asp-route-id="@item.ActivityId"> |
+                    @_localizer["Delete"]
+                </a>
             </td>
         </tr>
     }

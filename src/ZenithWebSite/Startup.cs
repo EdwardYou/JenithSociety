@@ -18,6 +18,10 @@ using ZenithWebSite.Data;
 using AspNet.Security.OpenIdConnect.Primitives;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Net;
+using Microsoft.AspNetCore.Mvc.Razor;
+using Microsoft.AspNetCore.Localization;
+using System.Globalization;
+using Microsoft.Extensions.Options;
 
 namespace ZenithWebSite
 {
@@ -100,8 +104,32 @@ namespace ZenithWebSite
                 options.DisableHttpsRequirement();
             });
 
-            services.AddMvc();
+            services.AddLocalization(opts => { opts.ResourcesPath = "Resources"; });
 
+            services.AddMvc()
+                .AddViewLocalization(
+                    LanguageViewLocationExpanderFormat.Suffix,
+                    opts => { opts.ResourcesPath = "Resources"; })
+                .AddDataAnnotationsLocalization();
+
+            services.Configure<RequestLocalizationOptions>(opts => {
+                var supportedCultures = new List<CultureInfo> {
+                    new CultureInfo("en"),
+                    new CultureInfo("en-US"),
+                    new CultureInfo("fr"),
+                    new CultureInfo("fr-FR"),
+                    new CultureInfo("zh-CN"),   // Chinese China
+                    new CultureInfo("ar-EG"),   // Arabic Egypt
+                    new CultureInfo("ko-KR"),   // Korea
+                    new CultureInfo("es-SV"),   // El-Salvador
+                  };
+
+                opts.DefaultRequestCulture = new RequestCulture("en-US");
+                // Formatting numbers, dates, etc.
+                opts.SupportedCultures = supportedCultures;
+                // UI strings that we have localized.
+                opts.SupportedUICultures = supportedCultures;
+            });
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
@@ -132,6 +160,9 @@ namespace ZenithWebSite
             }
 
             app.UseStaticFiles();
+
+            var options = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>();
+            app.UseRequestLocalization(options.Value);
 
             app.UseIdentity();
 

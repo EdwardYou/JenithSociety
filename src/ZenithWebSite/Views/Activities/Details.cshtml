@@ -1,17 +1,20 @@
 ﻿@model ZenithWebSite.Models.JenithEventModel.Activity
 
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer _localizer
+
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = _localizer["Details"];
 }
 
-<h2>Details</h2>
+<h2>@_localizer["Details"]</h2>
 
 <div>
     <h4>Activity</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.ActivityDescr)
+            <p>@_localizer["Description"] </p>
         </dt>
 
         <dd>
@@ -19,7 +22,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.CreationDate)
+            <p>@_localizer["Creation Date"] </p>
         </dt>
 
         <dd>
@@ -29,6 +32,10 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ActivityId }) |
-    @Html.ActionLink("Back to List", "Index")
+    <a asp-action="Edit" asp-route-id="@Model.ActivityId">
+        @_localizer["Edit"] |
+    </a>
+    <a asp-action="Index">
+        @_localizer["Back to List"]
+    </a>
 </p>
