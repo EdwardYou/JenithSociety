@@ -10,11 +10,11 @@ namespace ZenithWebSite.Models.JenithEventModel
     {
         public int ActivityId { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Required")]
         [Display(Name = "Description")]
         public string ActivityDescr { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Required")]
         [Display(Name = "Creation Date")]
         public DateTime CreationDate { get; set; }
 
